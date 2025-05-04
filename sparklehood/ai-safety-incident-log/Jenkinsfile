@@ -59,6 +59,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    echo 'Deploy stage (no-op)'
                     // Add your deployment commands here
                     // For example, if deploying to a server via SSH:
                     // sh 'ssh user@yourserver "cd /path/to/app && git pull && npm install && npm run start"'
