@@ -202,6 +202,3 @@ model Incident {
 
 ---
 
-## License
-
-ISC 
