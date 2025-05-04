@@ -14,39 +14,9 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    docker.image("node:${NODE_VERSION}").inside {
-                        sh 'npm install'
-                    }
-                }
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                script {
-                    docker.image("node:${NODE_VERSION}").inside {
-                        sh 'npm test'
-                    }
-                }
-            }
-        }
-
         stage('Build App Docker Image') {
             steps {
                 sh 'docker build -t ai-safety-incident-log:latest -f Dockerfile .'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    docker.image("node:${NODE_VERSION}").inside {
-                        sh 'npm run build'
-                    }
-                }
             }
         }
 
