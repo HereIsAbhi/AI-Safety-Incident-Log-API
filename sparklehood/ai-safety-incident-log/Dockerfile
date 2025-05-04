@@ -17,9 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "start"]
-
-FROM jenkins/jenkins:lts
-USER root
-RUN apt-get update && apt-get install -y docker.io ca-certificates
-USER jenkins 
+CMD ["npm", "start"] 
