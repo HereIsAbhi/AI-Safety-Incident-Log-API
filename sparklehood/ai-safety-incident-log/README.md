@@ -10,6 +10,8 @@ A Node.js/TypeScript REST API for logging and managing AI safety incidents, usin
 - Uses Prisma ORM for database access
 - SQLite as the default database (easy local setup)
 - Modular routing with Express
+
+## Unique Features
 - **PATCH** endpoint for partial updates
 - **/incidents/stats** endpoint for analytics (counts, trends, high-risk %)
 - **Email alerts** for "High" severity incidents (Ethereal for dev)
