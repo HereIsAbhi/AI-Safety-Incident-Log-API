@@ -204,3 +204,48 @@ model Incident {
 
 ---
 
+## Project Challenges Faced
+
+During the development and deployment of this project, several challenges were encountered across different stages. Here is a summary of the main issues and how they were resolved:
+
+
+1. **Database Configuration:**
+   - **Challenge:** Choosing a database that works for both local development and potential production deployment. SQLite is easy for local use, but not ideal for production.
+   - **Solution:** Defaulted to SQLite for local development, but documented how to switch to PostgreSQL for production by updating the `DATABASE_URL` and Prisma provider.
+
+2. **Prisma Migrations:**
+   - **Challenge:** Ensuring database schema changes are easy to apply and track.
+   - **Solution:** Used Prisma ORM for type-safe migrations and included migration commands in the setup instructions.
+
+3. **API Validation & Error Handling:**
+   - **Challenge:** Validating API input and providing meaningful error messages.
+   - **Solution:** Implemented validation for required fields and severity values, and ensured the API returns appropriate HTTP status codes and error messages.
+
+4. **Email Alerts (Nodemailer):**
+   - **Challenge:** Sending email alerts for high-severity incidents in a way that works for both development and production.
+   - **Solution:** Used Ethereal for development (with preview URLs in logs) and documented how to switch to a real email provider for production.
+
+5. **Dockerization:**
+   - **Challenge:** Creating a Dockerfile that works for local development, production, and CI/CD, and avoids conflicts between app and Jenkins images.
+   - **Solution:** Created separate Dockerfiles for the Node.js app and Jenkins. Documented Docker build and run commands in the README.
+
+6. **Jenkins CI/CD Pipeline:**
+   - **Challenge:**
+     - Jenkins in Docker could not access the host Docker daemon (permission errors).
+     - Jenkins container lacked Docker CLI and CA certificates (causing build and git SSL errors).
+     - Workspace was not mounted in node containers, leading to missing files during pipeline steps.
+     - Initial Dockerfile had multiple FROM statements, causing build confusion.
+   - **Solution:**
+     - Mounted the Docker socket and adjusted permissions for Jenkins.
+     - Built a custom Jenkins image with Docker CLI and CA certificates (`Dockerfile.jenkins`).
+     - Simplified the pipeline to use Docker build steps directly.
+     - Split Dockerfiles for app and Jenkins.
+
+7. **General Troubleshooting:**
+   - **Challenge:** Diagnosing issues with database migrations, email previews, Docker, and Jenkins permissions.
+   - **Solution:** Added troubleshooting tips to the README and used logs and error messages to guide fixes.
+
+These solutions resulted in a robust, maintainable, and reproducible workflow for both local development and automated CI/CD deployment.
+
+---
+
